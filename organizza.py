@@ -7,15 +7,6 @@ from winreg import HKEY_CURRENT_USER, OpenKey, QueryValueEx, HKEY_CURRENT_USER
 
 
 def create_folders(directories, DownloadPath):
-    """
-    This function creates the folders in <DownloadPath> where the files
-    will be moved to.
-    :param directories: dictionary, this is a dictionary containing the
-    names of the sorted folders and the extensions that correspond to those
-    folders.
-    :param DownloadPath: string, this is a string of the path to the
-    directory that is to be sorted.
-    """
     for key in directories:
         if key not in os.listdir(DownloadPath):
             os.mkdir(os.path.join(DownloadPath, key))
@@ -24,14 +15,6 @@ def create_folders(directories, DownloadPath):
 
 
 def organize_folders(directories, DownloadPath):
-    """
-    This function organizes the files in the specified folder into folders
-    :param directories: directories: dictionary, this is a dictionary
-    containing the names of the sorted folders and the extensions that
-    correspond to those folders.
-    :param DownloadPath: string, this is a string of the path to the
-    directory that is to be sorted.
-    """
     for file in os.listdir(DownloadPath):
         if os.path.isfile(os.path.join(DownloadPath, file)):
             src_path = os.path.join(DownloadPath, file)
@@ -44,12 +27,6 @@ def organize_folders(directories, DownloadPath):
 
 
 def organize_remaining_files(DownloadPath):
-    """
-    This function assigns the file that don't have a corresponding folder to
-    the <OTHER> directory.
-    :param DownloadPath: string, this is a string of the path to the
-    directory that is to be sorted.
-    """
     for file in os.listdir(DownloadPath):
         if os.path.isfile(os.path.join(DownloadPath, file)) and file != os.path.basename(sys.executable):
             src_path = os.path.join(DownloadPath, file)
@@ -58,15 +35,6 @@ def organize_remaining_files(DownloadPath):
 
 
 def organize_remaining_folders(directories, DownloadPath):
-    """
-    This function assings the folders within the specified directory to the
-    <FOLDER> directory.
-    :param directories: directories: dictionary, this is a dictionary
-    containing the names of the sorted folders and the extensions that
-    corresponds to those folders.
-    :param DownloadPath: string, this is a string of the path to the
-    directory that is to be sorted.
-    """
     list_dir = os.listdir(DownloadPath)
     organized_folders = []
     for folder in directories:
